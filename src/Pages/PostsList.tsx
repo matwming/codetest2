@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { initPosts } from '../store/reducer/PostsList/PostsList';
 import { Post } from '../store/reducer/NewPost/NewPost';
-import { PostStyle } from '../UI/Basic/basicStyle';
+import { PostStyle, Container, Loading } from '../UI/Basic/basicStyle';
 import axios from '../config/config';
 import { Link } from 'react-router-dom';
 
 export default function PostsList() {
   const [comment, setComment] = useState({ postId: 0, commentBody: '' });
+  const [loading, setLoading] = useState<boolean>(false);
   const [checkComment, setCheckComment] = useState(false);
   const dispatch = useDispatch();
   const allPosts = useSelector((state: { postsList: Post[] }) => {
@@ -48,6 +49,7 @@ export default function PostsList() {
     if (comment.commentBody.length === 0) {
       return alert('Please enter your comment!');
     }
+    setLoading(true);
     axios
       .post(`posts/${comment.postId}/comments`, { body: comment.commentBody })
       .then((res) => {
@@ -55,13 +57,16 @@ export default function PostsList() {
           console.log(res.data);
           setCheckComment(true);
         }
+        setLoading(false);
       })
       .catch((error: Error) => {
         console.log(error);
+        setLoading(false);
       });
   };
   return (
-    <>
+    <Container>
+      {loading && <Loading />}
       {checkComment && (
         <p>
           Your comment is successfully sent. Click{' '}
@@ -77,6 +82,6 @@ export default function PostsList() {
       )}
       <div>All posts are shown here.</div>
       {showAllPosts()}
-    </>
+    </Container>
   );
 }

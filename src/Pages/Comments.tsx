@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../config/config';
-import { PostStyle } from '../UI/Basic/basicStyle';
+import { PostStyle, Container } from '../UI/Basic/basicStyle';
 interface comment {
   postId: number;
   id: number;
@@ -31,9 +31,17 @@ export default function Comments() {
       comments.map((el: comment, index: number) => {
         return (
           <PostStyle>
-            <p>Name:{el.name}</p>
-            <p>Email:{el.email}</p>
-            <p>Body:{el.body}</p>
+            <p>
+              <strong>Name: </strong>:{el.name}
+            </p>
+            <p>
+              <strong>Email: </strong>
+              {el.email}
+            </p>
+            <p>
+              <strong>Body: </strong>
+              {el.body}
+            </p>
           </PostStyle>
         );
       })
@@ -42,9 +50,9 @@ export default function Comments() {
     );
   };
   return (
-    <>
+    <Container>
       <div>this is comment list</div>
       {showComment()}
-    </>
+    </Container>
   );
 }
