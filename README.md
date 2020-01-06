@@ -1,3 +1,22 @@
+Code Tests:
+
+Sample app should have the following features:
+1. user should be able to create the post
+2. user shoule be able to list the posts
+4. user shoule be able to comment
+
+For api use: jsonplaceholder.typicode.com
+
+<b>Requrements</b>:
+
+Disable cors in development;
+1. at least 3 routes;
+2. stateless component and hooks
+3.Redux or Mobx for state management;
+4.Es6 features
+5.CSS module
+6. Less or sass
+
 ## <u>Introduction</u>
 
 #### <u>eslint and prettier</u>
